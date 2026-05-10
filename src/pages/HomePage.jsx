@@ -1,8 +1,11 @@
 import { useState, useMemo, useCallback } from 'react';
+import { Helmet } from 'react-helmet-async';
 import RecipeCard from '../components/RecipeCard';
 import SearchFilter from '../components/SearchFilter';
 import recipesData from '../data/recipes.json';
 import styles from './HomePage.module.css';
+
+const SITE_URL = 'https://charlie-beard.github.io/fastmeals';
 
 function applyFilters(recipes, { query, maxTime, activeTags, sort }) {
   let result = recipes;
@@ -67,6 +70,19 @@ export default function HomePage() {
 
   return (
     <main className={styles.page}>
+      <Helmet>
+        <title>Weeknight Veg — Quick Vegetarian Dinners</title>
+        <meta name="description" content={`Browse ${recipesData.length} quick vegetarian recipes, build a weekly meal plan, and generate a smart shopping list.`} />
+        <link rel="canonical" href={SITE_URL} />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={SITE_URL} />
+        <meta property="og:site_name" content="Weeknight Veg" />
+        <meta property="og:title" content="Weeknight Veg — Quick Vegetarian Dinners" />
+        <meta property="og:description" content={`Browse ${recipesData.length} quick vegetarian recipes, build a weekly meal plan, and generate a smart shopping list.`} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Weeknight Veg — Quick Vegetarian Dinners" />
+        <meta name="twitter:description" content={`Browse ${recipesData.length} quick vegetarian recipes, build a weekly meal plan, and generate a smart shopping list.`} />
+      </Helmet>
       <div className="container">
         <section className={styles.hero}>
           <h1 className={styles.heroTitle}>Quick vegetarian dinners</h1>

@@ -1,16 +1,30 @@
 import { Link } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import { usePlan } from '../context/PlanContext';
 import PlanPanel from '../components/PlanPanel';
 import ShoppingList from '../components/ShoppingList';
 import ServingsControl from '../components/ServingsControl';
+import recipesData from '../data/recipes.json';
 import styles from './PlanPage.module.css';
 
 export default function PlanPage() {
-  const { plannedMeals, clearPlan, globalServings, setGlobalServings } = usePlan();
+  const { plannedMeals, clearPlan, globalServings, setGlobalServings, addMeal, isPlanned } = usePlan();
+
+  function handleAddRandom() {
+    const unplanned = recipesData.filter(r => !isPlanned(r.id));
+    if (unplanned.length === 0) return;
+    const pick = unplanned[Math.floor(Math.random() * unplanned.length)];
+    addMeal(pick.id, globalServings);
+  }
   const count = plannedMeals.length;
 
   return (
     <main className={styles.page}>
+      <Helmet>
+        <title>My Meal Plan — Weeknight Veg</title>
+        <meta name="description" content="Your weekly vegetarian meal plan and smart shopping list." />
+        <meta name="robots" content="noindex" />
+      </Helmet>
       <div className="container">
         <div className={styles.pageHeader}>
           <div>
@@ -37,6 +51,14 @@ export default function PlanPage() {
                 Clear plan
               </button>
             )}
+            <button
+              className="btn btn-secondary"
+              onClick={handleAddRandom}
+              disabled={recipesData.every(r => isPlanned(r.id))}
+              title="Add a random recipe to your plan"
+            >
+              🎲 Random
+            </button>
             <Link to="/" className="btn btn-secondary">
               + Add recipes
             </Link>

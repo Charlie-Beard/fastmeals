@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
 import { useParams, Link, useNavigate } from 'react-router-dom';
 import { usePlan } from '../context/PlanContext';
 import ServingsControl from '../components/ServingsControl';
@@ -6,6 +7,7 @@ import { formatQuantity, scaleQuantity, roundQuantity } from '../utils/ingredien
 import recipesData from '../data/recipes.json';
 import styles from './RecipePage.module.css';
 
+const SITE_URL = 'https://charlie-beard.github.io/fastmeals';
 const recipesMap = Object.fromEntries(recipesData.map(r => [r.id, r]));
 
 const CATEGORY_LABELS = {
@@ -64,8 +66,48 @@ export default function RecipePage() {
   const scale = localServings / recipe.baseServings;
   const grouped = groupIngredients(recipe.ingredients);
 
+  const canonicalUrl = `${SITE_URL}/recipe/${recipe.id}`;
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Recipe',
+    name: recipe.title,
+    description: recipe.description,
+    image: recipe.image,
+    prepTime: `PT${recipe.prepTime}M`,
+    cookTime: `PT${recipe.cookTime}M`,
+    totalTime: `PT${recipe.totalTime}M`,
+    recipeYield: `${recipe.baseServings} servings`,
+    recipeCategory: 'Main course',
+    suitableForDiet: 'https://schema.org/VegetarianDiet',
+    nutrition: { '@type': 'NutritionInformation', calories: `${recipe.calories} calories` },
+    recipeIngredient: recipe.ingredients.map(i =>
+      i.quantity ? `${i.quantity} ${i.unit} ${i.name}` : i.name
+    ),
+    recipeInstructions: recipe.steps.map((step, idx) => ({
+      '@type': 'HowToStep',
+      position: idx + 1,
+      text: step,
+    })),
+  };
+
   return (
     <main className={styles.page}>
+      <Helmet>
+        <title>{recipe.title} — Weeknight Veg</title>
+        <meta name="description" content={recipe.description} />
+        <link rel="canonical" href={canonicalUrl} />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={canonicalUrl} />
+        <meta property="og:site_name" content="Weeknight Veg" />
+        <meta property="og:title" content={`${recipe.title} — Weeknight Veg`} />
+        <meta property="og:description" content={recipe.description} />
+        {recipe.image && <meta property="og:image" content={recipe.image} />}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${recipe.title} — Weeknight Veg`} />
+        <meta name="twitter:description" content={recipe.description} />
+        {recipe.image && <meta name="twitter:image" content={recipe.image} />}
+        <script type="application/ld+json">{JSON.stringify(jsonLd)}</script>
+      </Helmet>
       <div className="container">
         <div className={styles.breadcrumb}>
           <button className={`btn btn-ghost ${styles.backBtn}`} onClick={() => navigate(-1)} aria-label="Go back">

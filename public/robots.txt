@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /plan
+
+Sitemap: https://charlie-beard.github.io/fastmeals/sitemap.xml

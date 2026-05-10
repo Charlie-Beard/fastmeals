@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { PlanProvider } from './context/PlanContext';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
@@ -32,11 +32,11 @@ export default function App() {
   useEffect(() => { preloadRecipeImages(); }, []);
 
   return (
-    <HashRouter>
+    <BrowserRouter basename="/fastmeals">
       <PlanProvider>
         <Header />
         <AnimatedRoutes />
       </PlanProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
