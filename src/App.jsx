@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { PlanProvider } from './context/PlanContext';
 import Header from './components/Header';
@@ -17,7 +17,7 @@ function preloadRecipeImages() {
 
 function ScrollToTop() {
   const { pathname } = useLocation();
-  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  useLayoutEffect(() => { window.scrollTo(0, 0); }, [pathname]);
   return null;
 }
 
