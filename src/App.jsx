@@ -1,9 +1,19 @@
+import { useEffect } from 'react';
 import { HashRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { PlanProvider } from './context/PlanContext';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
 import RecipePage from './pages/RecipePage';
 import PlanPage from './pages/PlanPage';
+import recipesData from './data/recipes.json';
+
+function preloadRecipeImages() {
+  const idle = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 200));
+  recipesData.forEach(recipe => {
+    if (!recipe.image) return;
+    idle(() => { new Image().src = recipe.image; }, { timeout: 5000 });
+  });
+}
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -19,6 +29,8 @@ function AnimatedRoutes() {
 }
 
 export default function App() {
+  useEffect(() => { preloadRecipeImages(); }, []);
+
   return (
     <HashRouter>
       <PlanProvider>
