@@ -156,18 +156,6 @@
   font-weight: 600;
 }
 
-.shuffleBtn {
-  flex-shrink: 0;
-  padding: 10px 12px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.shuffleBtn:active svg {
-  transform: rotate(180deg);
-  transition: transform 0.3s ease;
-}
 
 .clearBtn {
   align-self: flex-start;
