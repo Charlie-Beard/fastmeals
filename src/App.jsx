@@ -15,6 +15,12 @@ function preloadRecipeImages() {
   });
 }
 
+function ScrollToTop() {
+  const { pathname } = useLocation();
+  useEffect(() => { window.scrollTo(0, 0); }, [pathname]);
+  return null;
+}
+
 function AnimatedRoutes() {
   const location = useLocation();
   return (
@@ -34,6 +40,7 @@ export default function App() {
   return (
     <BrowserRouter basename="/fastmeals">
       <PlanProvider>
+        <ScrollToTop />
         <Header />
         <AnimatedRoutes />
       </PlanProvider>
