@@ -1,11 +1,12 @@
-import { useEffect, useLayoutEffect } from 'react';
+import { lazy, Suspense, useEffect, useLayoutEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { PlanProvider } from './context/PlanContext';
 import Header from './components/Header';
 import HomePage from './pages/HomePage';
-import RecipePage from './pages/RecipePage';
-import PlanPage from './pages/PlanPage';
 import recipesData from './data/recipes.json';
+
+const RecipePage = lazy(() => import('./pages/RecipePage'));
+const PlanPage   = lazy(() => import('./pages/PlanPage'));
 
 function preloadRecipeImages() {
   const idle = window.requestIdleCallback ?? ((cb) => setTimeout(cb, 200));
@@ -25,17 +26,23 @@ function AnimatedRoutes() {
   const location = useLocation();
   return (
     <div key={location.pathname} className="page-enter">
-      <Routes location={location}>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/recipe/:id" element={<RecipePage />} />
-        <Route path="/plan" element={<PlanPage />} />
-      </Routes>
+      <Suspense fallback={<div style={{ minHeight: '100dvh' }} />}>
+        <Routes location={location}>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/recipe/:id" element={<RecipePage />} />
+          <Route path="/plan" element={<PlanPage />} />
+        </Routes>
+      </Suspense>
     </div>
   );
 }
 
 export default function App() {
-  useEffect(() => { preloadRecipeImages(); }, []);
+  useEffect(() => {
+    preloadRecipeImages();
+    import('./pages/RecipePage');
+    import('./pages/PlanPage');
+  }, []);
 
   return (
     <BrowserRouter basename="/fastmeals">
