@@ -4,6 +4,7 @@ import { usePlan } from '../context/PlanContext';
 import PlanPanel from '../components/PlanPanel';
 import ShoppingList from '../components/ShoppingList';
 import ServingsControl from '../components/ServingsControl';
+import DiceButton from '../components/DiceButton';
 import recipesData from '../data/recipes.json';
 import styles from './PlanPage.module.css';
 
@@ -51,14 +52,10 @@ export default function PlanPage() {
                 Clear plan
               </button>
             )}
-            <button
-              className="btn btn-secondary"
+            <DiceButton
               onClick={handleAddRandom}
               disabled={recipesData.every(r => isPlanned(r.id))}
-              title="Add a random recipe to your plan"
-            >
-              🎲 Random
-            </button>
+            />
             <Link to="/" className="btn btn-secondary">
               + Add recipes
             </Link>
