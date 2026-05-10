@@ -1,0 +1,111 @@
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-10) var(--space-6);
+  text-align: center;
+  color: var(--text-tertiary);
+}
+
+.emptyEmoji {
+  font-size: 48px;
+  line-height: 1;
+  opacity: 0.7;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.meal {
+  background: var(--surface);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  padding: var(--space-3) var(--space-4);
+  transition: box-shadow var(--transition);
+}
+
+.meal:hover {
+  box-shadow: var(--shadow-sm);
+}
+
+.mealHero {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius);
+  background: color-mix(in srgb, var(--recipe-color) 15%, var(--surface-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.mealEmoji {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.mealInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.mealTitle {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--transition);
+}
+
+.mealTitle:hover {
+  color: var(--accent);
+}
+
+.mealMeta {
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.mealActions {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  flex-shrink: 0;
+}
+
+.removeBtn {
+  color: var(--text-tertiary);
+  opacity: 0.6;
+  transition: opacity var(--transition), color var(--transition);
+}
+
+.removeBtn:hover {
+  opacity: 1;
+  color: var(--red);
+  background: #fef0f0;
+}
+
+@media (max-width: 600px) {
+  .meal {
+    flex-wrap: wrap;
+  }
+
+  .mealActions {
+    width: 100%;
+    justify-content: space-between;
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--border-light);
+  }
+}
