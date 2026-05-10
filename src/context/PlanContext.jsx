@@ -7,6 +7,7 @@ export function PlanProvider({ children }) {
   const [plannedMeals, setPlannedMeals] = useLocalStorage('wv-plan', []);
   const [checkedItems, setCheckedItems] = useLocalStorage('wv-checked', {});
   const [hideBasics, setHideBasics] = useLocalStorage('wv-hide-basics', false);
+  const [globalServings, setGlobalServings] = useLocalStorage('wv-servings', 2);
 
   const addMeal = useCallback((recipeId, servings = 2) => {
     setPlannedMeals(prev => {
@@ -49,6 +50,8 @@ export function PlanProvider({ children }) {
       checkedItems,
       hideBasics,
       setHideBasics,
+      globalServings,
+      setGlobalServings,
       addMeal,
       removeMeal,
       updateServings,

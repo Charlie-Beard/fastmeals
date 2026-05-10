@@ -7,11 +7,11 @@ import styles from './ShoppingList.module.css';
 const recipesMap = Object.fromEntries(recipesData.map(r => [r.id, r]));
 
 export default function ShoppingList() {
-  const { plannedMeals, checkedItems, hideBasics, setHideBasics, toggleChecked, clearChecked } = usePlan();
+  const { plannedMeals, checkedItems, hideBasics, setHideBasics, globalServings, toggleChecked, clearChecked } = usePlan();
 
   const allIngredients = useMemo(
-    () => mergeAllIngredients(plannedMeals, recipesMap),
-    [plannedMeals]
+    () => mergeAllIngredients(plannedMeals, recipesMap, globalServings),
+    [plannedMeals, globalServings]
   );
 
   const filtered = hideBasics ? allIngredients.filter(i => !i.pantryStaple) : allIngredients;

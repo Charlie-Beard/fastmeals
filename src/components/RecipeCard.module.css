@@ -24,7 +24,7 @@
 /* Hero */
 .hero {
   position: relative;
-  height: 140px;
+  height: 90px;
   background: linear-gradient(135deg, color-mix(in srgb, var(--recipe-color) 18%, transparent), color-mix(in srgb, var(--recipe-color) 8%, transparent));
   background-color: color-mix(in srgb, var(--recipe-color) 10%, var(--surface-2));
   display: flex;
@@ -34,7 +34,7 @@
 }
 
 .emoji {
-  font-size: 60px;
+  font-size: 44px;
   line-height: 1;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.12));
   transition: transform var(--transition-slow);
@@ -42,6 +42,11 @@
 
 .card:hover .emoji {
   transform: scale(1.08);
+}
+
+@media (min-width: 640px) {
+  .hero { height: 140px; }
+  .emoji { font-size: 60px; }
 }
 
 .heroOverlay {
@@ -52,11 +57,18 @@
 
 /* Body */
 .body {
-  padding: var(--space-4);
+  padding: var(--space-3);
   display: flex;
   flex-direction: column;
-  gap: var(--space-2);
+  gap: var(--space-1);
   flex: 1;
+}
+
+@media (min-width: 640px) {
+  .body {
+    padding: var(--space-4);
+    gap: var(--space-2);
+  }
 }
 
 .meta {
@@ -91,10 +103,16 @@
   font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.5;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
+  display: none;
+}
+
+@media (min-width: 640px) {
+  .description {
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
 }
 
 .tags {
@@ -113,10 +131,17 @@
 .footer {
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: var(--space-3) var(--space-4);
+  justify-content: flex-end;
+  padding: var(--space-2) var(--space-3);
   border-top: 1px solid var(--border-light);
-  gap: var(--space-3);
+  gap: var(--space-2);
+}
+
+@media (min-width: 640px) {
+  .footer {
+    padding: var(--space-3) var(--space-4);
+    gap: var(--space-3);
+  }
 }
 
 .portions {
@@ -131,8 +156,8 @@
 .btnAdd {
   background: var(--accent);
   color: #fff;
-  padding: 8px 14px;
-  font-size: 13px;
+  padding: 6px 10px;
+  font-size: 11px;
   border-radius: var(--radius-full);
 }
 .btnAdd:hover { background: var(--accent-hover); }
@@ -140,11 +165,18 @@
 .btnRemove {
   background: var(--accent-light);
   color: var(--accent-text);
-  padding: 8px 14px;
-  font-size: 13px;
+  padding: 6px 10px;
+  font-size: 11px;
   border-radius: var(--radius-full);
   font-weight: 600;
 }
 .btnRemove:hover {
   background: #c6e8e6;
+}
+
+@media (min-width: 640px) {
+  .btnAdd, .btnRemove {
+    padding: 8px 14px;
+    font-size: 13px;
+  }
 }

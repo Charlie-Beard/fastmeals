@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { usePlan } from '../context/PlanContext';
 import PlanPanel from '../components/PlanPanel';
 import ShoppingList from '../components/ShoppingList';
+import ServingsControl from '../components/ServingsControl';
 import styles from './PlanPage.module.css';
 
 export default function PlanPage() {
-  const { plannedMeals, clearPlan } = usePlan();
+  const { plannedMeals, clearPlan, globalServings, setGlobalServings } = usePlan();
   const count = plannedMeals.length;
 
   return (
@@ -21,6 +22,12 @@ export default function PlanPage() {
             </p>
           </div>
           <div className={styles.headerActions}>
+            <ServingsControl
+              value={globalServings}
+              onChange={setGlobalServings}
+              min={1}
+              max={8}
+            />
             {count > 0 && (
               <button
                 className="btn btn-ghost"

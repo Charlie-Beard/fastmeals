@@ -49,12 +49,6 @@ export default function RecipeCard({ recipe }) {
       </Link>
 
       <div className={styles.footer}>
-        <div className={styles.portions}>
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M17 8C8 10 5.9 16.17 3.82 21h3.41c.3-.78.61-1.53.93-2.28L8 19h8l.84-0.28c.32.75.63 1.5.93 2.28h3.41C19.1 16.17 17 10 8 8h9z"/>
-          </svg>
-          {recipe.fruitVegPortions} portions
-        </div>
         <button
           className={`btn ${planned ? styles.btnRemove : styles.btnAdd}`}
           onClick={handlePlanToggle}

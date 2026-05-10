@@ -135,10 +135,11 @@ export const CATEGORY_LABELS = {
   condiments: 'Condiments & Oils',
 };
 
-export function mergeAllIngredients(plannedMeals, recipesMap) {
+export function mergeAllIngredients(plannedMeals, recipesMap, globalServings = 2) {
   const merged = {};
 
-  for (const { recipeId, servings } of plannedMeals) {
+  for (const { recipeId } of plannedMeals) {
+    const servings = globalServings;
     const recipe = recipesMap[recipeId];
     if (!recipe) continue;
 

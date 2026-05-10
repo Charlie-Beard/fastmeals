@@ -22,7 +22,7 @@ const ALL_TAGS = [
   'indian', 'asian', 'mexican', 'mediterranean',
 ];
 
-export default function SearchFilter({ onFilterChange }) {
+export default function SearchFilter({ onFilterChange, onShuffle }) {
   const [query, setQuery] = useState('');
   const [maxTime, setMaxTime] = useState(null);
   const [activeTags, setActiveTags] = useState([]);
@@ -111,6 +111,20 @@ export default function SearchFilter({ onFilterChange }) {
             <option key={o.value} value={o.value}>{o.label}</option>
           ))}
         </select>
+
+        <button
+          className={`btn btn-secondary ${styles.shuffleBtn}`}
+          onClick={onShuffle}
+          aria-label="Shuffle recipes"
+          title="Shuffle"
+        >
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
+            <polyline points="16 3 21 3 21 8"/>
+            <line x1="4" y1="20" x2="21" y2="3"/>
+            <polyline points="21 16 21 21 16 21"/>
+            <line x1="15" y1="15" x2="21" y2="21"/>
+          </svg>
+        </button>
       </div>
 
       {showFilters && (

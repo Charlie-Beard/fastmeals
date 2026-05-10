@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { usePlan } from '../context/PlanContext';
-import ServingsControl from './ServingsControl';
 import recipesData from '../data/recipes.json';
 import styles from './PlanPanel.module.css';
 
 const recipesMap = Object.fromEntries(recipesData.map(r => [r.id, r]));
 
 export default function PlanPanel() {
-  const { plannedMeals, removeMeal, updateServings } = usePlan();
+  const { plannedMeals, removeMeal } = usePlan();
 
   if (plannedMeals.length === 0) {
     return (
@@ -21,7 +20,7 @@ export default function PlanPanel() {
 
   return (
     <ul className={styles.list}>
-      {plannedMeals.map(({ recipeId, servings }) => {
+      {plannedMeals.map(({ recipeId }) => {
         const recipe = recipesMap[recipeId];
         if (!recipe) return null;
         return (
@@ -44,10 +43,6 @@ export default function PlanPanel() {
             </div>
 
             <div className={styles.mealActions}>
-              <ServingsControl
-                value={servings}
-                onChange={v => updateServings(recipeId, v)}
-              />
               <button
                 className={`btn btn-ghost btn-icon ${styles.removeBtn}`}
                 onClick={() => removeMeal(recipeId)}

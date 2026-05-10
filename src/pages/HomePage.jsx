@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useCallback } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import SearchFilter from '../components/SearchFilter';
 import recipesData from '../data/recipes.json';
@@ -45,8 +45,25 @@ export default function HomePage() {
   const [filters, setFilters] = useState({
     query: '', maxTime: null, activeTags: [], sort: 'default'
   });
+  const [shuffleSeed, setShuffleSeed] = useState(0);
 
-  const filtered = useMemo(() => applyFilters(recipesData, filters), [filters]);
+  const filtered = useMemo(() => {
+    const result = applyFilters(recipesData, filters);
+    if (shuffleSeed === 0) return result;
+    // Fisher-Yates with seed derived from shuffleSeed
+    const arr = [...result];
+    let s = shuffleSeed;
+    for (let i = arr.length - 1; i > 0; i--) {
+      s = (s * 1664525 + 1013904223) & 0xffffffff;
+      const j = Math.abs(s) % (i + 1);
+      [arr[i], arr[j]] = [arr[j], arr[i]];
+    }
+    return arr;
+  }, [filters, shuffleSeed]);
+
+  const handleShuffle = useCallback(() => {
+    setShuffleSeed(Math.floor(Math.random() * 1e9) + 1);
+  }, []);
 
   return (
     <main className={styles.page}>
@@ -59,7 +76,7 @@ export default function HomePage() {
         </section>
 
         <div className={styles.filterWrap}>
-          <SearchFilter onFilterChange={setFilters} />
+          <SearchFilter onFilterChange={setFilters} onShuffle={handleShuffle} />
         </div>
 
         {filtered.length === 0 ? (
