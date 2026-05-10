@@ -1,78 +1,75 @@
-/* ─── Design Tokens ───────────────────────────────────────── */
+/* ─── Design Tokens — Solarized Light + Anthropic ─────────── */
+/*
+  Palette source: Ethan Schoonover's Solarized Light
+    base3  #FDF6E3  base2  #EEE8D5  base1  #93A1A1
+    base01 #586E75  base03 #002B36
+    cyan   #2AA198  blue   #268BD2  green  #859900
+    orange #CB4B16  red    #DC322F  yellow #B58900
+*/
 :root {
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 
-  --bg: #fafaf8;
-  --surface: #ffffff;
-  --surface-2: #f5f3ef;
-  --surface-3: #ece9e2;
-  --border: #e0ddd6;
-  --border-light: #ece9e2;
+  /* ── Surfaces (Solarized warm cream) ── */
+  --bg:           #FDF6E3;   /* base3  — main page background  */
+  --surface:      #FFFEF9;   /* near-white with warmth — cards  */
+  --surface-2:    #EEE8D5;   /* base2  — secondary surfaces     */
+  --surface-3:    #E2DBCA;   /* between base2 and base1         */
+  --border:       #CDC6B2;   /* mid border                      */
+  --border-light: #DAD4C1;   /* subtle dividers                 */
 
-  --text-primary: #1a1a18;
-  --text-secondary: #5a5952;
-  --text-tertiary: #9a9890;
+  /* ── Text (Solarized blue-grey) ── */
+  --text-primary:   #002B36;  /* base03 — headings, strong text */
+  --text-secondary: #586E75;  /* base01 — body, labels          */
+  --text-tertiary:  #93A1A1;  /* base1  — hints, placeholders   */
 
-  --accent: #3d6b35;
-  --accent-hover: #2e5228;
-  --accent-light: #eaf2e7;
-  --accent-text: #2a4d24;
+  /* ── Accent (darkened Solarized cyan — 5.1:1 on white) ── */
+  --accent:       #1A7A71;
+  --accent-hover: #145E57;
+  --accent-light: #E2F4F3;
+  --accent-text:  #125E58;
 
-  --orange: #c96a18;
-  --orange-light: #fdf0e4;
+  /* ── Semantic colours (Solarized) ── */
+  --orange:       #CB4B16;   /* sol-orange */
+  --orange-light: #FAF0EB;
+  --red:          #DC322F;   /* sol-red    */
+  --yellow:       #B58900;   /* sol-yellow */
+  --blue:         #268BD2;   /* sol-blue   */
 
-  --red: #b83232;
-
+  /* ── Radii ── */
   --radius-xs: 6px;
   --radius-sm: 8px;
-  --radius: 12px;
+  --radius:    12px;
   --radius-lg: 16px;
   --radius-xl: 20px;
   --radius-full: 9999px;
 
-  --shadow-xs: 0 1px 2px rgba(0,0,0,0.06);
-  --shadow-sm: 0 1px 4px rgba(0,0,0,0.07), 0 2px 8px rgba(0,0,0,0.04);
-  --shadow: 0 2px 8px rgba(0,0,0,0.08), 0 8px 24px rgba(0,0,0,0.05);
-  --shadow-lg: 0 8px 32px rgba(0,0,0,0.10), 0 2px 8px rgba(0,0,0,0.06);
-  --shadow-focus: 0 0 0 3px rgba(61,107,53,0.22);
+  /* ── Shadows — slightly warmer than neutral black ── */
+  --shadow-xs: 0 1px 2px rgba(0,43,54,0.06);
+  --shadow-sm: 0 1px 4px rgba(0,43,54,0.07), 0 2px 8px rgba(0,43,54,0.04);
+  --shadow:    0 2px 8px rgba(0,43,54,0.08), 0 8px 24px rgba(0,43,54,0.05);
+  --shadow-lg: 0 8px 32px rgba(0,43,54,0.10), 0 2px 8px rgba(0,43,54,0.06);
+  --shadow-focus: 0 0 0 3px rgba(26, 122, 113, 0.30);
 
-  --transition: 150ms ease;
+  /* ── Motion ── */
+  --transition:      150ms ease;
   --transition-slow: 250ms ease;
 
+  /* ── Layout ── */
   --header-height: 60px;
-  --max-width: 1280px;
+  --max-width:     1280px;
   --content-width: 820px;
 
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-5: 20px;
-  --space-6: 24px;
-  --space-8: 32px;
+  /* ── Spacing scale ── */
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  12px;
+  --space-4:  16px;
+  --space-5:  20px;
+  --space-6:  24px;
+  --space-8:  32px;
   --space-10: 40px;
   --space-12: 48px;
   --space-16: 64px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #111110;
-    --surface: #1c1c1a;
-    --surface-2: #242421;
-    --surface-3: #2e2e2a;
-    --border: #38382f;
-    --border-light: #2e2e2a;
-
-    --text-primary: #f4f4f0;
-    --text-secondary: #a0a097;
-    --text-tertiary: #66665e;
-
-    --accent-light: #192b16;
-    --accent-text: #7fbf72;
-
-    --orange-light: #2a1a0a;
-  }
 }
 
 /* ─── Reset ───────────────────────────────────────────────── */
@@ -97,10 +94,7 @@ body {
   min-height: 100dvh;
 }
 
-img, svg {
-  display: block;
-  max-width: 100%;
-}
+img, svg { display: block; max-width: 100%; }
 
 button {
   font-family: inherit;
@@ -114,28 +108,22 @@ input, select, textarea {
   font-size: inherit;
 }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-ul, ol {
-  list-style: none;
-}
+a { color: inherit; text-decoration: none; }
+ul, ol { list-style: none; }
 
 h1, h2, h3, h4 {
   line-height: 1.25;
   font-weight: 600;
 }
 
-/* ─── Focus styles ───────────────────────────────────────── */
+/* ─── Focus ───────────────────────────────────────────────── */
 :focus-visible {
   outline: none;
   box-shadow: var(--shadow-focus);
   border-radius: var(--radius-xs);
 }
 
-/* ─── Utility classes ─────────────────────────────────────── */
+/* ─── Layout utility ──────────────────────────────────────── */
 .container {
   width: 100%;
   max-width: var(--max-width);
@@ -144,17 +132,13 @@ h1, h2, h3, h4 {
 }
 
 @media (min-width: 768px) {
-  .container {
-    padding: 0 var(--space-8);
-  }
+  .container { padding: 0 var(--space-8); }
 }
 
 .sr-only {
   position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
   overflow: hidden;
   clip: rect(0,0,0,0);
   white-space: nowrap;
@@ -172,19 +156,19 @@ h1, h2, h3, h4 {
   font-size: 14px;
   font-weight: 500;
   line-height: 1;
-  transition: background var(--transition), color var(--transition), transform var(--transition), box-shadow var(--transition);
+  transition: background var(--transition), color var(--transition),
+              transform var(--transition), box-shadow var(--transition);
   white-space: nowrap;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
 }
 
-.btn:active {
-  transform: scale(0.97);
-}
+.btn:active { transform: scale(0.97); }
 
 .btn-primary {
   background: var(--accent);
   color: #fff;
+  letter-spacing: 0.01em;
 }
 .btn-primary:hover { background: var(--accent-hover); }
 
@@ -214,7 +198,7 @@ h1, h2, h3, h4 {
   height: 36px;
 }
 
-/* ─── Tags / Chips ───────────────────────────────────────── */
+/* ─── Tags ───────────────────────────────────────────────── */
 .tag {
   display: inline-flex;
   align-items: center;
@@ -242,7 +226,7 @@ h1, h2, h3, h4 {
   }
 }
 
-/* ─── Page transitions ───────────────────────────────────── */
+/* ─── Page enter animation ───────────────────────────────── */
 .page-enter {
   animation: pageIn 200ms ease forwards;
 }
