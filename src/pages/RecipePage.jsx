@@ -80,7 +80,15 @@ export default function RecipePage() {
           {/* Left: recipe content */}
           <article className={styles.content}>
             <div className={styles.hero} style={{ '--recipe-color': recipe.color }}>
-              <span className={styles.heroEmoji} aria-hidden="true">{recipe.emoji}</span>
+              {recipe.image ? (
+                <img
+                  src={recipe.image}
+                  alt={recipe.title}
+                  className={styles.heroImg}
+                />
+              ) : (
+                <span className={styles.heroEmoji} aria-hidden="true">{recipe.emoji}</span>
+              )}
             </div>
 
             <header className={styles.header}>
